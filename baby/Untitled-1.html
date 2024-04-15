@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heart Animation Baby</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent scrolling */
+  }
+
+  #video-background {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1; /* Set z-index to be behind other content */
+  }
+
+  h1, h2 {
+    font-size: 87px;
+    font-weight: 0px;
+    position: relative; /* Make sure text is positioned relative to the body */
+    z-index: 4; /* Set z-index to 1 to ensure text appears above hearts */
+    font-family: 'JetBrains Mono', monospace; /* Apply custom font */
+    color: white; /* Ensure text is visible against video background */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    display: inline; /* Make them display inline */
+  }
+
+  .content {
+    position: relative;
+    z-index: 5; /* Set z-index higher than video to ensure content is above video */
+    padding: 20px;
+    color: white; /* Ensure content is visible against video background */
+  }
+</style>
+</head>
+<body>
+
+<video id="video-background" autoplay muted loop>
+  <source src="171.mp4" type="video/mp4">
+  
+  Your browser does not support the video tag.
+</video>
+
+<div class="content">
+  <h1 id="myText"></h1>
+  <h2 id="mySecondText"></h2>
+</div>
+
+<script>
+  // Delay 3 giây trước khi bắt đầu hiệu ứng viết chữ
+  setTimeout(function() {
+    typeWriter();
+  }, 0); 
+  // Hiệu ứng viết chữ cho cả thẻ h1 và h2
+  const text = [
+
+    "MY BABY LOVE YOU SO MUCH FOREVER YOU AND I !!!",
+    "I LOVE YOU OH I LOVE YOU SO MUCH FOREVER YOU AND I.."
+  ];
+  const textElement1 = document.getElementById("myText");
+  const textElement2 = document.getElementById("mySecondText");
+  let currentText = 0;
+  let index = 0;
+
+  function typeWriter() {
+    const currentTextLength = text[currentText].length;
+    if (index < currentTextLength) {
+      if (currentText === 0) {
+        textElement1.textContent += text[currentText][index];
+      } else {
+        textElement2.textContent += text[currentText][index];
+      }
+      index++;
+      setTimeout(typeWriter, 100);
+    } else {
+      // Nếu đã viết xong đoạn chữ hiện tại, chuyển sang đoạn chữ tiếp theo
+      currentText++;
+      index = 0;
+      if (currentText < text.length) {
+        // Nếu còn đoạn chữ tiếp theo, tiếp tục viết
+        setTimeout(typeWriter, 200); // Delay 200ms trước khi bắt đầu viết đoạn chữ tiếp theo
+      }
+    }
+  }
+</script>
+
+</body>
+</html>
